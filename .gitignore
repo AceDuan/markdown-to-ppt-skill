@@ -1,0 +1,14 @@
+# 本地依赖、构建产物和检查截图
+node_modules/
+dist/
+.qa/
+*.local
+
+# 本地环境变量和日志
+.env
+.env.*
+!.env.example
+*.log
+
+# 一次性整理脚本，仅保留在本地
+/_finalize.js

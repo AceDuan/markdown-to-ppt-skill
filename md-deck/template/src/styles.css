@@ -1,0 +1,256 @@
+:root {
+  --bg: #0f1216;
+  --panel: #171c23;
+  --panel2: #1d242d;
+  --line: #2a323d;
+  --text: #e8eaed;
+  --muted: #9aa3ae;
+  --accent-1: #22d3ee;   /* 贯穿色 1（示例：青） */
+  --accent-2: #f5a623;    /* 贯穿色 2（示例：琥珀） */
+  --accent-3: #ec4899;  /* 贯穿色 3（示例：品红） */
+  --tip: #34d399;
+  --warn: #f87171;
+  --info: #60a5fa;
+  --accent: #22d3ee;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  background: #08090b;
+  color: var(--text);
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* ---------- 舞台（1920×1080 设计基准，整体缩放） ---------- */
+.stage {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: center center;
+  background: var(--bg);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 64px 96px 110px;
+  display: flex;
+  flex-direction: column;
+  animation: slide-in 0.35s ease;
+}
+@keyframes slide-in { from { opacity: 0; } to { opacity: 1; } }
+
+.kicker {
+  font-size: 26px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.h1 {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}
+.lead { font-size: 32px; color: var(--muted); }
+
+/* ---------- 通用卡片 ---------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+.card-title { font-size: 30px; font-weight: 700; margin-bottom: 14px; }
+
+/* ---------- Callout ---------- */
+.callout {
+  border-radius: 14px;
+  padding: 22px 28px;
+  font-size: 28px;
+  line-height: 1.55;
+  border: 1px solid var(--line);
+  border-left-width: 6px;
+  background: var(--panel);
+}
+.callout .co-title { font-weight: 700; margin-bottom: 6px; }
+.callout.tip   { border-left-color: var(--tip); }
+.callout.tip .co-title { color: var(--tip); }
+.callout.warning { border-left-color: var(--warn); }
+.callout.warning .co-title { color: var(--warn); }
+.callout.info  { border-left-color: var(--info); }
+.callout.info .co-title { color: var(--info); }
+
+/* ---------- 列表 ---------- */
+.bullets { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+.bullets li {
+  font-size: 30px;
+  line-height: 1.5;
+  padding-left: 34px;
+  position: relative;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+/* ---------- 流程节点 ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-size: 28px;
+  white-space: nowrap;
+}
+.pill.hot { border-color: var(--accent); color: var(--accent); }
+.arrow { color: var(--muted); font-size: 30px; padding: 0 10px; }
+
+/* ---------- 表格 ---------- */
+.kv {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 28px;
+  line-height: 1.5;
+}
+.kv th, .kv td { border: 1px solid var(--line); padding: 16px 22px; text-align: left; vertical-align: top; }
+.kv th { background: var(--panel2); font-weight: 700; }
+
+/* ---------- 公式 ---------- */
+.formula { font-size: 34px; overflow-x: auto; padding: 8px 0; }
+.formula .katex-display { margin: 0.4em 0; }
+
+/* ---------- AU 实验徽标 ---------- */
+.lab-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid rgba(245, 166, 35, 0.55);
+  color: var(--accent-2);
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 26px;
+  font-weight: 700;
+  animation: lab-pulse 1.6s ease-in-out infinite;
+}
+@keyframes lab-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(245, 166, 35, 0); }
+}
+
+/* ---------- 章节封面 ---------- */
+.divider-num {
+  font-size: 300px;
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--line);
+  user-select: none;
+}
+
+/* ---------- 页脚与进度 ---------- */
+.footer {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  color: var(--muted);
+  z-index: 5;
+}
+.progress-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  z-index: 5;
+}
+.progress-bar { height: 100%; background: var(--accent); transition: width 0.25s ease; }
+
+/* ---------- 目录总览 / 备注面板（不随舞台缩放） ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 9, 11, 0.96);
+  z-index: 50;
+  overflow-y: auto;
+  padding: 40px 56px;
+}
+.overlay h2 { font-size: 24px; margin-bottom: 24px; color: var(--muted); font-weight: 400; }
+.ov-chapter { margin-bottom: 28px; }
+.ov-chapter-name { font-size: 20px; color: var(--accent); margin-bottom: 10px; letter-spacing: 1px; }
+.ov-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.ov-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.ov-item:hover { border-color: var(--accent); }
+.ov-item.current { border-color: var(--accent); color: var(--accent); }
+.ov-item .no { color: var(--muted); margin-right: 6px; font-size: 13px; }
+
+.notes-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 420px;
+  background: rgba(13, 16, 20, 0.98);
+  border-left: 1px solid var(--line);
+  z-index: 60;
+  padding: 28px;
+  overflow-y: auto;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.notes-panel h3 { font-size: 15px; color: var(--muted); font-weight: 400; margin-bottom: 10px; letter-spacing: 1px; }
+.notes-panel .note-block { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+.notes-panel .next-title { color: var(--accent); }
+
+/* ---------- 动画容器控件 ---------- */
+.fig-controls { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.fig-btn {
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.fig-btn:hover { border-color: var(--accent); color: var(--accent); }
+.fig-slider { flex: 1; accent-color: var(--accent); height: 6px; }
+.fig-time { font-size: 20px; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 110px; text-align: right; }
+
+.ghost-tag {
+  display: inline-block;
+  font-size: 22px;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 8px 16px;
+}
